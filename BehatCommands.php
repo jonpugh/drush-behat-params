@@ -1,20 +1,13 @@
 <?php
 
-namespace Drush\Commands;
+namespace Drush\Commands\drush_behat_params;
 
-use Consolidation\AnnotatedCommand\AnnotationData;
-use Consolidation\AnnotatedCommand\CommandData;
+use Drush\Commands\DrushCommands;
+use Consolidation\SiteAlias\SiteAliasManagerAwareInterface;
+use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
+
 use Consolidation\AnnotatedCommand\Events\CustomEventAwareInterface;
 use Consolidation\AnnotatedCommand\Events\CustomEventAwareTrait;
-use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
-use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
-use Consolidation\SiteAlias\SiteAliasTrait;
-use Drush\SiteAlias\SiteAliasManagerAwareInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Drush\Style\DrushStyle;
-use Drush\Utils\StringUtils;
 
 /**
  *
