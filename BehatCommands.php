@@ -2,6 +2,7 @@
 
 namespace Drush\Commands\drush_behat_params;
 
+use Drupal\Core\Composer\Composer;
 use Drush\Commands\DrushCommands;
 use Consolidation\SiteAlias\SiteAliasManagerAwareInterface;
 use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
@@ -25,7 +26,9 @@ class BehatCommands extends DrushCommands implements CustomEventAwareInterface, 
    * @usage drush behat
    *   Run behat tests with info from the alias.
    */
-  public function behat($options = [])
+  public function behat($options = [
+    'behat_command' => 'bin/behat --colors',
+  ])
   {
     $behat_params = [
       "extensions" => [
@@ -47,12 +50,18 @@ class BehatCommands extends DrushCommands implements CustomEventAwareInterface, 
       "BEHAT_PARAMS" => json_encode($behat_params),
     ];
 
+    // @TODO: Make configurable
+    $cwd = realpath($this->commandData->options()['root'] . '/..');
+    $command = $this->input()->getOption('behat_command');
+
     $this->logger()->notice("Detected URL and root from Drush:");
     $this->logger()->notice($this->commandData->options()['uri']);
     $this->logger()->notice($this->commandData->options()['root']);
     $this->logger()->notice($this->siteAliasManager()->getSelf()->name());
+    $this->logger()->notice("Cwd: " . $cwd );
+    $this->logger()->notice("Command: " . $command );
 
-    $this->processManager()->shell('bin/behat --colors', NULL, $env)->mustRun(function ($type, $buffer) {
+    $this->processManager()->shell($command, $cwd, $env)->mustRun(function ($type, $buffer) {
         echo $buffer;
       }
     );
