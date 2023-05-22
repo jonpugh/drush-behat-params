@@ -11,3 +11,7 @@ Usage:
 Behat uses either hard-coded config or a JSON blob in BEHAT_PARAMS to configure what site to test.
 
 Instead of messing with ENV vars, this plugin sets BEHAT_PARAMS for you using the Drush alias information.
+
+## Help?
+
+Check out the git repo at https://github.com/jonpugh/drush-behat-params.
